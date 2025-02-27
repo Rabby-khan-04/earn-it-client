@@ -3,6 +3,8 @@ import Main from "@/layouts/Main";
 import About from "@/pages/About/About";
 import AddNewJob from "@/pages/AddNewJob/AddNewJob";
 import Admin from "@/pages/Admin/Admin";
+import Login from "@/pages/Auth/Login";
+import Register from "@/pages/Auth/Register";
 import Checkout from "@/pages/Checkout/Checkout";
 import Contact from "@/pages/Contact/Contact";
 import Employer from "@/pages/Employer/Employer";
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "auth/login",
+        element: <Login />,
+      },
+      {
+        path: "auth/register",
+        element: <Register />,
       },
     ],
   },
