@@ -6,7 +6,7 @@ const Header = () => {
   const { authUser } = useAuth();
 
   return (
-    <header className="py-5 bg-base-100">
+    <header className="py-5 absolute top-0 w-full z-50">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link to="/" className="inline-block">

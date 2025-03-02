@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const BannerText = ({ subtitle, title, text, badge }) => {
   return (
-    <div>
+    <div className="max-w-2xl">
       <p
         style={{ backgroundColor: `${badge}` }}
         className={`text-sm inline-block py-[10px] px-4 rounded-md font-semibold text-title uppercase mb-5`}

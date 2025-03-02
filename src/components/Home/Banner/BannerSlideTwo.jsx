@@ -2,7 +2,7 @@ import bannerBg from "@/assets/images/banner/banner-bg-2.jpg";
 import bannerImg from "@/assets/images/banner/banner-img-2.png";
 import BannerText from "./BannerText";
 import { Link } from "react-router-dom";
-import BaseIconStats from "./BaseIconStats";
+import UserInfo from "./UserInfo";
 import { AiFillLike } from "react-icons/ai";
 
 const BannerSlideTwo = () => {
@@ -26,9 +26,9 @@ const BannerSlideTwo = () => {
           </div>
         </div>
         <div className="justify-self-end relative">
-          <img src={bannerImg} className="w-[650px] inline-block" alt="" />
+          <img src={bannerImg} className="w-auto h-full inline-block" alt="" />
           <div className="absolute left-0 top-3/4">
-            <BaseIconStats
+            <UserInfo
               ICON={AiFillLike}
               title="Ariene McCoy"
               subtitle="UX/UI Designer"
@@ -38,7 +38,7 @@ const BannerSlideTwo = () => {
             />
           </div>
           <div className="absolute -right-20 top-1/2">
-            <BaseIconStats
+            <UserInfo
               ICON={AiFillLike}
               title="Jane Cooper"
               subtitle="UX/UI Designer"
