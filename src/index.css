@@ -115,8 +115,17 @@
 }
 
 @theme {
+  /* Fonts */
   --font-inter: "Inter", "sans-serif";
   --font-dm-sans: "DM Sans", "sans-serif";
+
+  /* Colors */
+  --color-primary: #1f4b3f;
+  --color-secondary: #5bbb7b;
+  --color-title: #1e1e1e;
+  --color-text: #787878;
+  --color-base-100: #fbf7ed;
+  --color-base-200: #f1fcfa;
 }
 
 @layer base {
@@ -126,4 +135,50 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .container {
+    @apply max-w-[1400px] mx-auto;
+  }
+
+  .btn__primary {
+    @apply relative inline-block overflow-hidden text-white bg-primary py-5 px-9 rounded-[12px] leading-none font-dm-sans text-base font-semibold z-10 cursor-pointer before:content-[''] before:absolute before:left-1/2 before:bottom-[-40px] before:w-8 before:h-8 before:rounded-full before:bg-secondary before:transform before:-translate-x-1/2 before:-z-10 before:transition-all before:duration-500 hover:before:h-[300px] hover:before:w-[300px];
+  }
+
+  .btn__primary__sm {
+    @apply relative inline-block overflow-hidden text-white bg-primary py-4 px-7 rounded-md leading-none font-dm-sans text-base font-semibold z-10 cursor-pointer before:content-[''] before:absolute before:left-1/2 before:bottom-[-40px] before:w-8 before:h-8 before:rounded-full before:bg-secondary before:transform before:-translate-x-1/2 before:-z-10 before:transition-all before:duration-500 hover:before:h-[200px] hover:before:w-[200px];
+  }
+
+  .btn__secondary__sm {
+    @apply relative inline-block overflow-hidden text-white bg-title py-4 px-7 rounded-md leading-none font-dm-sans text-base font-semibold z-10 cursor-pointer before:content-[''] before:absolute before:left-1/2 before:bottom-[-40px] before:w-8 before:h-8 before:rounded-full before:bg-secondary before:transform before:-translate-x-1/2 before:-z-10 before:transition-all before:duration-500 hover:before:h-[200px] hover:before:w-[200px];
+  }
+
+  /* .btn__primary {
+    overflow: hidden;
+    color: #fff;
+    background-color: #1f4b3f;
+    padding: 20px 36px;
+    border-radius: 12px;
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+  }
+
+  .btn__primary::before {
+    content: " ";
+    left: 50%;
+    z-index: -1;
+    width: 40px;
+    height: 40px;
+    bottom: -40px;
+    position: absolute;
+    border-radius: 50%;
+    background: #5bbb7b;
+    transform: translateX(-50%);
+    transition: width 0.5s, height 0.5s;
+  }
+
+  .btn__primary:hover::before {
+    width: 300px;
+    height: 300px;
+  } */
 }
