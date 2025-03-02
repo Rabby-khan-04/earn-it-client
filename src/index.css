@@ -121,7 +121,7 @@
 
   /* Colors */
   --color-primary: #1f4b3f;
-  --color-secondary: #5bbb7b;
+  --color-secondary: #168882;
   --color-title: #1e1e1e;
   --color-text: #787878;
   --color-base-100: #fbf7ed;
@@ -154,5 +154,9 @@
 
   .btn__secondary__sm {
     @apply relative inline-block overflow-hidden text-white bg-title py-3 px-7 rounded-md leading-none font-dm-sans text-sm font-semibold z-10 cursor-pointer before:content-[''] before:absolute before:left-1/2 before:bottom-[-40px] before:w-8 before:h-8 before:rounded-full before:bg-secondary before:transform before:-translate-x-1/2 before:-z-10 before:transition-all before:duration-500 hover:before:h-[200px] hover:before:w-[200px];
+  }
+
+  .color {
+    background-color: #21dfd63e;
   }
 }
