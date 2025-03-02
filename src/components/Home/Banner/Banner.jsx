@@ -1,9 +1,9 @@
-import BannerSlideOne from "./BannerSlideOne";
+import BannerSlideTwo from "./BannerSlideTwo";
 
 const Banner = () => {
   return (
     <section>
-      <BannerSlideOne />
+      <BannerSlideTwo />
     </section>
   );
 };
