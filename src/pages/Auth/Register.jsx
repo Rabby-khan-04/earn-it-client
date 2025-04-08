@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import SocalLogin from "@/components/auth/SocalLogin";
+import useAuth from "@/hook/useAuth";
 
 const Register = () => {
   const {
@@ -12,7 +13,16 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const { createUser } = useAuth();
+
+  const onSubmit = (data) => {
+    const name = data.name;
+    const photo = data.photo;
+    const email = data.email;
+    const password = data.password;
+
+    createUser(name, photo, email, password);
+  };
 
   return (
     <section className="py-24 bg-base-100">
@@ -50,6 +60,24 @@ const Register = () => {
                 />
                 <p className="text-xs text-red-500 font-inter">
                   {errors.name && <span>This field is required</span>}
+                </p>
+              </div>
+
+              <div className="space-y-1">
+                <label
+                  htmlFor="photo"
+                  className="text-title text-lg inline-block font-dm-sans font-normal"
+                >
+                  Photo
+                </label>
+                <Input
+                  type="url"
+                  id="photo"
+                  placeholder="Photo URL"
+                  {...register("photo", { required: true })}
+                />
+                <p className="text-xs text-red-500 font-inter">
+                  {errors.photo && <span>This field is required</span>}
                 </p>
               </div>
               <div className="space-y-1">
