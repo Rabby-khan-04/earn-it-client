@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import SocalLogin from "@/components/auth/SocalLogin";
+import useAuth from "@/hook/useAuth";
 
 const Login = () => {
   const {
@@ -12,7 +13,14 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const { signInUser } = useAuth();
+
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+
+    signInUser(email, password);
+  };
 
   return (
     <section className="py-24 bg-base-100">

@@ -2,6 +2,7 @@ import auth from "@/firebase/firebase.config";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import toast from "react-hot-toast";
@@ -31,8 +32,8 @@ const useAuth = create((set) => ({
     set({ isAuthLoading: true });
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      set({ authUser: res.user });
       if (res.user) {
+        set({ authUser: res.user });
         updateProfile(auth.currentUser, { displayName, photoURL })
           .then(() => {
             toast.success("User registered successfully!!");
@@ -46,6 +47,21 @@ const useAuth = create((set) => ({
       console.error(`Error in create user: ${error}`);
       set({ authUser: null });
       set({ isAuthLoading: false });
+    }
+  },
+
+  signInUser: async (email, password) => {
+    set({ isAuthLoading: true });
+    try {
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      if (res.user) {
+        set({ authUser: res.user, isAuthLoading: false });
+        toast.success("User loggen in successfully");
+      }
+    } catch (error) {
+      toast.error("User login failed");
+      console.error(`Error in create user: ${error}`);
+      set({ authUser: null, isAuthLoading: false });
     }
   },
 }));
