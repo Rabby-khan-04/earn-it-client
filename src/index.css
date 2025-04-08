@@ -144,6 +144,10 @@
     @apply relative inline-block overflow-hidden text-white bg-primary py-5 px-9 rounded-[12px] leading-none font-dm-sans text-base font-semibold z-10 cursor-pointer before:content-[''] before:absolute before:left-1/2 before:bottom-[-40px] before:w-8 before:h-8 before:rounded-full before:bg-secondary before:transform before:-translate-x-1/2 before:-z-10 before:transition-all before:duration-500 hover:before:h-[300px] hover:before:w-[300px];
   }
 
+  .btn__primary__auth {
+    @apply relative overflow-hidden text-white  w-full flex justify-center items-center gap-1 bg-primary py-5 px-9 rounded-[12px] leading-none font-dm-sans text-base font-semibold z-10 cursor-pointer before:content-[''] before:absolute before:left-1/2 before:bottom-[-40px] before:w-8 before:h-8 before:rounded-full before:bg-secondary before:transform before:-translate-x-1/2 before:-z-10 before:transition-all before:duration-500 hover:before:h-[1600px] hover:before:w-[1600px];
+  }
+
   .btn__secondary {
     @apply relative inline-block overflow-hidden text-white bg-title py-5 px-9 rounded-[12px] leading-none font-dm-sans text-base font-semibold z-10 cursor-pointer before:content-[''] before:absolute before:left-1/2 before:bottom-[-40px] before:w-8 before:h-8 before:rounded-full before:bg-secondary before:transform before:-translate-x-1/2 before:-z-10 before:transition-all before:duration-500 hover:before:h-[200px] hover:before:w-[200px];
   }
