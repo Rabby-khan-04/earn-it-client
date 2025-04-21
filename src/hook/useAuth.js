@@ -3,7 +3,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  updateProfile,
+  signOut,
 } from "firebase/auth";
 import toast from "react-hot-toast";
 import { create } from "zustand";
@@ -28,41 +28,26 @@ const useAuth = create((set) => ({
     return unsubscribe;
   },
 
-  createUser: async (displayName, photoURL, email, password) => {
+  createUser: (email, password) => {
     set({ isAuthLoading: true });
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      if (res.user) {
-        set({ authUser: res.user });
-        updateProfile(auth.currentUser, { displayName, photoURL })
-          .then(() => {
-            toast.success("User registered successfully!!");
-          })
-          .catch((err) => {
-            console.error(`Error in update user: ${err}`);
-          });
-      }
-    } catch (error) {
-      toast.error("User registration failed");
-      console.error(`Error in create user: ${error}`);
-      set({ authUser: null });
-      set({ isAuthLoading: false });
-    }
+    return createUserWithEmailAndPassword(auth, email, password);
   },
 
-  signInUser: async (email, password) => {
+  signInUser: (email, password) => {
     set({ isAuthLoading: true });
-    try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
-      if (res.user) {
-        set({ authUser: res.user, isAuthLoading: false });
-        toast.success("User loggen in successfully");
-      }
-    } catch (error) {
-      toast.error("User login failed");
-      console.error(`Error in create user: ${error}`);
-      set({ authUser: null, isAuthLoading: false });
-    }
+
+    return signInWithEmailAndPassword(auth, email, password);
+  },
+
+  singoutUser: () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("User logged out successfully!!");
+      })
+      .catch((err) => {
+        toast.error("Something went wrong!!");
+        console.log(`Error In Signout: ${err}`);
+      });
   },
 }));
 

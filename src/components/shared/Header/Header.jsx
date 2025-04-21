@@ -3,7 +3,13 @@ import useAuth from "@/hook/useAuth";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { authUser } = useAuth();
+  const { authUser, singoutUser } = useAuth();
+
+  console.log(authUser);
+
+  const handleSignOut = () => {
+    singoutUser();
+  };
 
   return (
     <header className="py-5 absolute top-0 w-full z-50">
@@ -17,7 +23,14 @@ const Header = () => {
         <div className="flex items-center gap-3">
           {authUser ? (
             <>
-              <button className="btn__primary__sm">Logout</button>
+              <img
+                src={authUser.photoURL}
+                className="size-10 object-cover rounded-full"
+                alt=""
+              />
+              <button onClick={handleSignOut} className="btn__primary__sm">
+                Logout
+              </button>
             </>
           ) : (
             <>

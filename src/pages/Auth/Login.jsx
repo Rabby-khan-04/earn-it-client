@@ -1,10 +1,11 @@
 import authImg from "@/assets/images/auth/auth-img.svg";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import SocalLogin from "@/components/auth/SocalLogin";
 import useAuth from "@/hook/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -12,6 +13,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { signInUser } = useAuth();
 
@@ -19,7 +22,17 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
 
-    signInUser(email, password);
+    signInUser(email, password)
+      .then((res) => {
+        if (res.user) {
+          toast.success("User loggen in successfully");
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        toast.error("User login failed");
+        console.error(`Error in create user: ${err}`);
+      });
   };
 
   return (

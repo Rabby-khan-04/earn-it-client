@@ -1,27 +1,65 @@
 import authImg from "@/assets/images/auth/auth-img.svg";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import SocalLogin from "@/components/auth/SocalLogin";
 import useAuth from "@/hook/useAuth";
+import toast from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
+import auth from "@/firebase/firebase.config";
+import useAxiosPublic from "@/hook/useAxiosPublic";
 
 const Register = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const axiosPublic = useAxiosPublic();
+
   const { createUser } = useAuth();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const name = data.name;
     const photo = data.photo;
     const email = data.email;
     const password = data.password;
 
-    createUser(name, photo, email, password);
+    createUser(email, password)
+      .then((res) => {
+        if (res.user) {
+          updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo,
+          })
+            .then(() => {
+              const userInfo = {
+                name: res.user.displayName,
+                email: res.user.email,
+                phoot: res.user.photoURL,
+                createdAt: res.user.metadata.createdAt,
+                uid: res.user.uid,
+              };
+
+              axiosPublic.post("/auth/user", userInfo).then((data) => {
+                if (data?.data?.data?.insertedId) {
+                  toast.success("User registered successfully!!");
+                  navigate("/");
+                }
+              });
+            })
+            .catch((err) => {
+              console.error(`Error in update user: ${err}`);
+            });
+        }
+      })
+      .catch((err) => {
+        toast.error("User registration failed");
+        console.error(`Error in create user: ${err}`);
+      });
   };
 
   return (
