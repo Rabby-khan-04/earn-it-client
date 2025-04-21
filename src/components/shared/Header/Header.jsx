@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const { authUser, singoutUser } = useAuth();
 
-  console.log(authUser);
-
   const handleSignOut = () => {
     singoutUser();
   };

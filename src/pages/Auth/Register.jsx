@@ -8,7 +8,7 @@ import useAuth from "@/hook/useAuth";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
 import auth from "@/firebase/firebase.config";
-import useAxiosPublic from "@/hook/useAxiosPublic";
+import axiosPublic from "@/utils/axiosPublic";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,8 +17,6 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const axiosPublic = useAxiosPublic();
 
   const { createUser } = useAuth();
 
