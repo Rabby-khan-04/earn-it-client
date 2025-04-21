@@ -54,7 +54,15 @@ const useAuth = create((set) => ({
   singoutUser: () => {
     signOut(auth)
       .then(() => {
-        toast.success("User logged out successfully!!");
+        axiosPublic
+          .post("/auth/logout")
+          .then(() => {
+            localStorage.removeItem("access-token");
+            toast.success("User logged out successfully!!");
+          })
+          .catch((err) => {
+            console.log(`Error in singout: ${err}`);
+          });
       })
       .catch((err) => {
         toast.error("Something went wrong!!");
