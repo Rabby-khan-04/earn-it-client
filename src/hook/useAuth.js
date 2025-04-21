@@ -2,8 +2,10 @@ import auth from "@/firebase/firebase.config";
 import axiosPublic from "@/utils/axiosPublic";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import toast from "react-hot-toast";
@@ -49,6 +51,10 @@ const useAuth = create((set) => ({
     set({ isAuthLoading: true });
 
     return signInWithEmailAndPassword(auth, email, password);
+  },
+
+  loginWithGoogle: () => {
+    return signInWithPopup(auth, new GoogleAuthProvider());
   },
 
   singoutUser: () => {

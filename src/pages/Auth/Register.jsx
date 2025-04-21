@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
 import auth from "@/firebase/firebase.config";
 import axiosPublic from "@/utils/axiosPublic";
-import axios from "axios";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import useCountry from "@/hook/useCountry";
@@ -52,12 +51,17 @@ const Register = () => {
                 country,
               };
 
-              axiosPublic.post("/auth/user", userInfo).then((data) => {
-                if (data?.data?.data?.insertedId) {
-                  toast.success("User registered successfully!!");
-                  navigate("/");
-                }
-              });
+              axiosPublic
+                .post("/auth/user", userInfo)
+                .then((data) => {
+                  if (data?.data?.data?.insertedId) {
+                    toast.success("User registered successfully!!");
+                    navigate("/");
+                  }
+                })
+                .catch((err) => {
+                  console.log(`Error in saving user info: ${err}`);
+                });
             })
             .catch((err) => {
               console.error(`Error in update user: ${err}`);
