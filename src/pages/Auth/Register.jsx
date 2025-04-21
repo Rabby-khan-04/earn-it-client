@@ -1,6 +1,6 @@
 import authImg from "@/assets/images/auth/auth-img.svg";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import SocalLogin from "@/components/auth/SocalLogin";
@@ -9,22 +9,30 @@ import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
 import auth from "@/firebase/firebase.config";
 import axiosPublic from "@/utils/axiosPublic";
+import axios from "axios";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import useCountry from "@/hook/useCountry";
 
 const Register = () => {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
-
+  const country = useCountry();
   const { createUser } = useAuth();
+
+  console.log(country);
 
   const onSubmit = async (data) => {
     const name = data.name;
     const photo = data.photo;
     const email = data.email;
     const password = data.password;
+    const role = data.role;
 
     createUser(email, password)
       .then((res) => {
@@ -37,9 +45,11 @@ const Register = () => {
               const userInfo = {
                 name: res.user.displayName,
                 email: res.user.email,
-                phoot: res.user.photoURL,
-                createdAt: res.user.metadata.createdAt,
+                photo: res.user.photoURL,
+                role,
+                member_since: res.user.metadata.createdAt,
                 uid: res.user.uid,
+                country,
               };
 
               axiosPublic.post("/auth/user", userInfo).then((data) => {
@@ -146,6 +156,49 @@ const Register = () => {
                   id="password"
                   placeholder="Password"
                   {...register("password", { required: true })}
+                />
+                <p className="text-xs text-red-500 font-inter">
+                  {errors.password && <span>This field is required</span>}
+                </p>
+              </div>
+
+              <div className="space-y-1">
+                <Controller
+                  name="role"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: "Role is required" }}
+                  render={({ field }) => (
+                    <RadioGroup
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      aria-label="Select your option"
+                    >
+                      <div className="flex items-center gap-4">
+                        <label className="text-title text-lg inline-block font-dm-sans font-bold">
+                          Your Type:
+                        </label>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="worker" id="worker" />
+                          <Label
+                            className="text-title text-lg inline-block font-dm-sans font-normal "
+                            htmlFor="worker"
+                          >
+                            Worker
+                          </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="employer" id="employer" />
+                          <Label
+                            className="text-title text-lg inline-block font-dm-sans font-normal"
+                            htmlFor="employer"
+                          >
+                            Employer
+                          </Label>
+                        </div>
+                      </div>
+                    </RadioGroup>
+                  )}
                 />
                 <p className="text-xs text-red-500 font-inter">
                   {errors.password && <span>This field is required</span>}
