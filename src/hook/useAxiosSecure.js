@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000/api/v1",
@@ -9,6 +10,7 @@ const axiosSecure = axios.create({
 
 const useAxiosSecure = () => {
   const navigate = useNavigate();
+  const { singoutUser } = useAuth();
 
   useEffect(() => {
     const reqInterceptor = axiosSecure.interceptors.request.use(function (
@@ -35,8 +37,7 @@ const useAxiosSecure = () => {
           error.response &&
           (error.response?.status === 401 || error.response?.status === 403)
         ) {
-          console.warn("Unauthorized!! Redirection to login...");
-          navigate("/auth/login");
+          singoutUser();
         }
 
         return Promise.reject(error);
@@ -47,7 +48,7 @@ const useAxiosSecure = () => {
       axiosSecure.interceptors.request.eject(reqInterceptor);
       axiosSecure.interceptors.response.eject(resInterceptor);
     };
-  }, [navigate]);
+  }, [navigate, singoutUser]);
 
   return axiosSecure;
 };

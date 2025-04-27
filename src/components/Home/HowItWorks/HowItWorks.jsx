@@ -1,5 +1,5 @@
 import sectionImg from "@/assets/images/home/how-it-works.jpg";
-import SectionTitle from "@/components/shared/SectionTitle";
+import SectionTitle from "@/components/shared/SectionTitle/SectionTitle";
 import registerIco from "@/assets/icons/register.svg";
 import taskIco from "@/assets/icons/task.svg";
 import rewardsIco from "@/assets/icons/rewards.svg";

@@ -1,4 +1,4 @@
-import SectionTitle from "@/components/shared/SectionTitle";
+import SectionTitle from "@/components/shared/SectionTitle/SectionTitle";
 import postJob from "@/assets/icons/cv.svg";
 import freelancer from "@/assets/icons/web-design.svg";
 import secure from "@/assets/icons/secure.svg";

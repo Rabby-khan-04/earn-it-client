@@ -64,7 +64,7 @@ const useAuth = create((set) => ({
           .post("/auth/logout")
           .then(() => {
             localStorage.removeItem("access-token");
-            toast.success("User logged out successfully!!");
+            toast.success("User logged out!!");
           })
           .catch((err) => {
             console.log(`Error in singout: ${err}`);

@@ -18,6 +18,7 @@ import PurcheaseCoin from "@/pages/PurcheaseCoin/PurcheaseCoin";
 import SubmitedJobs from "@/pages/SubmitedJobs/SubmitedJobs";
 import Worker from "@/pages/Worker/Worker";
 import { createBrowserRouter } from "react-router-dom";
+import EmployerRoute from "./EmployerRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "about",
-        element: <About />,
+        element: (
+          <EmployerRoute>
+            <About />
+          </EmployerRoute>
+        ),
       },
       {
         path: "contact",
