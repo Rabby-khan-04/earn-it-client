@@ -14,6 +14,7 @@ import { create } from "zustand";
 const useAuth = create((set) => ({
   authUser: null,
   isAuthLoading: true,
+  userInfo: null,
 
   initializeAuthUser: () => {
     set({ isAuthLoading: true });
@@ -21,13 +22,17 @@ const useAuth = create((set) => ({
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         set({ authUser: user });
-        set({ isAuthLoading: false });
 
         axiosPublic
           .post("/auth/jwt", { email: user?.email })
           .then((res) => {
             if (res?.data?.data?.token) {
               localStorage.setItem("access-token", res.data.data.token);
+            }
+
+            if (res?.data?.data?.user) {
+              set({ userInfo: res.data.data.user });
+              set({ isAuthLoading: false });
             }
           })
           .catch((err) => {

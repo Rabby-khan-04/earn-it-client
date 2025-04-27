@@ -7,16 +7,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import DropDownContent from "../DropDownContent/DropDownContent";
 
-const Header = () => {
-  const { authUser, singoutUser } = useAuth();
-
-  const handleSignOut = () => {
-    singoutUser();
-  };
-
+const DashboardHeader = () => {
+  const { authUser } = useAuth();
   return (
-    <header className="py-5 absolute top-0 w-full z-50">
+    <header className="py-5">
       <div className="container flex items-center justify-between">
+        <div className="">
+          <Link
+            to="/dashboard/my-jobs"
+            className="font-dm-sans text-lg font-semibold"
+          >
+            My Tasks
+          </Link>
+        </div>
         <div className="flex items-center gap-8">
           <Link to="/" className="inline-block">
             <img src={logo} className="w-40" alt="" />
@@ -34,13 +37,12 @@ const Header = () => {
                     alt=""
                   />
                 </DropdownMenuTrigger>
-
                 <DropDownContent />
               </DropdownMenu>
 
-              <button onClick={handleSignOut} className="btn__primary__sm">
-                Logout
-              </button>
+              <Link to="/dashboard/jobs" className="btn__primary__sm">
+                Browse Jobs
+              </Link>
             </>
           ) : (
             <>
@@ -58,4 +60,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default DashboardHeader;

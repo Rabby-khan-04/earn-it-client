@@ -2,23 +2,20 @@ import Dashboard from "@/layouts/Dashboard";
 import Main from "@/layouts/Main";
 import About from "@/pages/About/About";
 import AddNewJob from "@/pages/AddNewJob/AddNewJob";
-import Admin from "@/pages/Admin/Admin";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Checkout from "@/pages/Checkout/Checkout";
 import Contact from "@/pages/Contact/Contact";
-import Employer from "@/pages/Employer/Employer";
 import Home from "@/pages/Home/Home";
 import Jobs from "@/pages/Jobs/Jobs";
 import ManageJobs from "@/pages/ManageJobs/ManageJobs";
 import ManageUsers from "@/pages/ManageUsers/ManageUsers";
 import MyJobs from "@/pages/MyJobs/MyJobs";
 import PaymentHistory from "@/pages/PaymentHistory/PaymentHistory";
+import Profile from "@/pages/Profile/Profile";
 import PurcheaseCoin from "@/pages/PurcheaseCoin/PurcheaseCoin";
 import SubmitedJobs from "@/pages/SubmitedJobs/SubmitedJobs";
-import Worker from "@/pages/Worker/Worker";
 import { createBrowserRouter } from "react-router-dom";
-import EmployerRoute from "./EmployerRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,11 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "about",
-        element: (
-          <EmployerRoute>
-            <About />
-          </EmployerRoute>
-        ),
+        element: <About />,
       },
       {
         path: "contact",
@@ -57,17 +50,8 @@ const router = createBrowserRouter([
     element: <Dashboard />,
     children: [
       {
-        path: "worker",
-        element: <Worker />,
-      },
-
-      {
-        path: "employer",
-        element: <Employer />,
-      },
-      {
-        path: "admin",
-        element: <Admin />,
+        path: "profile",
+        element: <Profile />,
       },
       {
         path: "jobs",
