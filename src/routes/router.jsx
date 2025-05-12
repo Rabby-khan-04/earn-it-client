@@ -16,6 +16,7 @@ import Profile from "@/pages/Profile/Profile";
 import PurcheaseCoin from "@/pages/PurcheaseCoin/PurcheaseCoin";
 import SubmitedJobs from "@/pages/SubmitedJobs/SubmitedJobs";
 import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "jobs",
